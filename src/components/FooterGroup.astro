@@ -1,0 +1,18 @@
+---
+export type Props = {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+<div class="footer-group">
+	<p>{title}</p>
+	<div class="footer-group-items" role="list">
+		<slot />
+	</div>
+</div>
+<style is:global>
+	.footer-group {
+		min-width: 8rem;
+	}
+</style>

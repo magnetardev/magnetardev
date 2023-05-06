@@ -1,8 +1,12 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import BaseHead from '@components/BaseHead.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import ContactListItem from '@components/ContactListItem.astro';
+import Section from '@components/Section.astro';
+import ProjectsList from '@components/ProjectsList.astro';
+import PostList from '@components/PostList.astro';
 ---
 
 <!DOCTYPE html>
@@ -13,38 +17,55 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	<body>
 		<Header title={SITE_TITLE} />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/pages/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			<Section>
+				<p class="headline-title">Hey, I'm Magnetar.</p>
+				<p class="headline-subtitle">I am designing & building sites, apps, and tools.</p>
+			</Section>
+
+			<Section>
+				<h2>About Me</h2>
+				<p>
+					Occaecat veniam commodo sit pariatur pariatur. Eiusmod fugiat eu magna est nulla veniam esse anim ad id tempor. Labore eiusmod ea anim minim cillum consequat ut adipisicing aliqua. Cillum ea duis et ad minim duis minim eiusmod laborum exercitation ullamco eiusmod amet dolor est.
+				</p>
+			</Section>
+
+			<Section>
+				<h2>Contact</h2>
+				<div role="list">
+					<ContactListItem label="Email" detail="contact@magnetar.dev" href="mailto:contact@magnetar.dev" />
+					<ContactListItem label="Twitter" detail="magnetardev" href="https://twitter.com/magnetardev" />
+					<ContactListItem label="GitHub" detail="magnetardev" href="https://github.com/magnetardev" />
+					<ContactListItem label="Mastodon" detail="@magnetardev@mstdn.social" href="https://mstdn.social/@magnetar" />
+				</div>
+			</Section>
+
+			<Section>
+				<h2>Featured Works</h2>
+				<ProjectsList />
+			</Section>
+
+			<Section>
+				<h2>Recent Posts</h2>
+				<PostList />
+			</Section>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style is:global>
+	.headline-title {
+		font-size: 3rem;
+		font-weight: 700;
+	}
+
+	.headline-subtitle {
+		font-size: 1.5rem;
+	}
+
+	h2 {
+		margin-block: 1rem 0.5rem;
+		font-size: 1.05rem;
+		font-weight: 600;
+	}
+</style>

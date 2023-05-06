@@ -1,0 +1,51 @@
+<div class="prose">
+	<slot />
+</div>
+<style is:global>
+.prose {
+	& h1 {
+		display: none;
+	}
+
+
+	& pre {
+		padding: 1rem;
+		border-radius: 0.5rem;
+		margin-block: 0.75rem;
+	}
+
+	& pre,
+	& code {
+		font-family: ui-monospace, Melno, monospace;
+	}
+
+	& h2 {
+		margin-block-start: 1rem;
+		font-size: 1.5rem;
+		font-weight: 600;
+	}
+
+	& h3 {
+		margin-block-start: 0.75rem;
+		font-size: 1.25rem;
+		font-weight: 600;
+	}
+
+	& h4 {
+		margin-block-start: 0.50rem;
+		font-size: 1rem;
+		font-weight: 600;
+	}
+
+	& p {
+		margin-block-end: 1rem;
+	}
+}
+
+hr {
+	display: block;
+	border: none;
+	height: 1px;
+	background: #000;
+}
+</style>

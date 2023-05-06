@@ -1,25 +1,79 @@
 ---
 import HeaderLink from './HeaderLink.astro';
+import Logo from './icons/logo.astro';
 import { SITE_TITLE } from '../consts';
 ---
 
-<header>
-	<h2>
-		{SITE_TITLE}
-	</h2>
-	<nav>
-		<HeaderLink href="/">Home</HeaderLink>
-		<HeaderLink href="/blog">Blog</HeaderLink>
-		<HeaderLink href="/about">About</HeaderLink>
-		<HeaderLink href="https://twitter.com/astrodotbuild" target="_blank">Twitter</HeaderLink>
-		<HeaderLink href="https://github.com/withastro/astro" target="_blank">GitHub</HeaderLink>
-	</nav>
+<header class="header">
+	<div class="header-content">
+		<a class="header-branding" href="/">
+			<div class="header-logo">
+				<Logo />
+			</div>
+			<h1 class="header-title">{SITE_TITLE}</h1>
+		</a>
+		<nav class="header-items">
+			<HeaderLink href="/blog">Blog</HeaderLink>
+			<HeaderLink href="/projects">Projects</HeaderLink>
+			<HeaderLink href="https://github.com/magnetardev" target="_blank">GitHub</HeaderLink>
+		</nav>
+	</div>
 </header>
-<style>
-	header {
-		margin: 0em 0 2em;
+
+<style is:global>
+	.header {
+		.header-content {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			max-width: 52rem;
+			margin: auto;
+			padding: 1rem;
+		}
+
+		.header-branding {
+			display: flex;
+			align-items: center;
+			text-decoration: none;
+			color: #000;
+
+			.header-logo {
+				width: 2.5rem;
+				height: 2.5rem;
+				padding: 0.25rem;
+				border-radius: 1.25rem;
+
+				& svg {
+					width: 2rem;
+					height: 2rem;
+				}
+			}
+
+			.header-title {
+				margin-inline-start: 0.5rem;
+				font-weight: 500;
+			}
+		}
+
+		.header-branding:hover .header-logo {
+			box-shadow: rgba(0 0 0 / 0.15) 0 0 0 2px;
+		}
+
+		.header-items {
+			display: flex;
+			align-items: center;
+		}
 	}
-	h2 {
-		margin: 0.5em 0;
+
+	@media (prefers-reduced-motion: no-preference) {
+		.header-branding .header-logo {
+			transition: box-shadow 0.2s ease-in-out;
+		}
+	}
+
+	@media (width <= 32rem) {
+		.header-title {
+			display: none;
+		}
 	}
 </style>

@@ -1,0 +1,81 @@
+---
+import { CollectionEntry, getCollection } from 'astro:content';
+
+export type Props = {
+	featured?: boolean;
+	prioritize?: boolean;
+	maximum?: number;
+}
+
+let projects: CollectionEntry<'projects'>[] = await getCollection('projects');
+
+const { featured = false, prioritize = false, maximum } = Astro.props;
+
+if (featured) {
+	projects = projects.filter((project) => project.data.feature);
+}
+
+if (prioritize) {
+	projects.sort(({ data: a }, { data: b }) => {
+		if (!a.priority && b.priority) {
+			return -1;
+		}
+
+		if (a.priority && !b.priority) {
+			return 1;
+		}
+
+		if (!a.priority && !b.priority) {
+			return 0;
+		}
+
+		if (a.priority! < b.priority!) {
+			return -1;
+		} 
+
+		if (a.priority! > b.priority!) {
+			return 1;
+		} 
+
+		return 0;
+	});
+}
+
+if (maximum) {
+	projects = projects.slice(0, Math.min(maximum, projects.length));
+}
+
+---
+
+<div class="projects-list">
+	{projects.map(({ slug, data: project }) => {
+		return <a class="project-item" href={`/projects/${slug}`}>
+			<h3 class="project-item-title">{project.title}</h3>
+			<p class="project-item-headline">{project.headline}</p>
+		</div>;
+	})}
+</div>
+
+<style is:global>
+	.projects-list {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+	}
+
+	.project-item {
+		color: inherit;
+		text-decoration: none;
+		background-color: rgba(0 0 0 / 0.035);
+		padding: 1rem;
+		border-radius: 0.5rem;
+
+		.project-item-title {
+			font-weight: 500;
+		}
+
+		.project-item-headline {
+			
+		}
+	}
+</style>

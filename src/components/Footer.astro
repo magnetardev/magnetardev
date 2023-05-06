@@ -1,13 +1,38 @@
 ---
-const today = new Date();
+// import { SOCIAL_LINKS } from "../consts";
+// import FooterLink from "./FooterLink.astro"
+// import FooterGroup from "./FooterGroup.astro"
 ---
-
 <footer>
-	&copy; {today.getFullYear()} YOUR NAME HERE. All rights reserved.
+	<!-- <div class="footer-links-container"> -->
+	<!-- 	<FooterGroup title="Site"> -->
+	<!-- 		<FooterLink title="Blog" href="/blog" /> -->
+	<!-- 		<FooterLink title="Projects" href="/projects" /> -->
+	<!-- 		<FooterLink title="RSS" href="/rss.xml" /> -->
+	<!-- 	</FooterGroup> -->
+	<!-- 	<FooterGroup title="Social"> -->
+	<!-- 		{SOCIAL_LINKS.map((link) => <FooterLink title={link.label} href={link.url} />)} -->
+	<!-- 	</FooterGroup> -->
+	<!-- </div> -->
+	<p class="copyright">&copy; Magnetar</p>
 </footer>
-<style>
+<style is:global>
 	footer {
-		padding: 25px;
-		text-align: center;
+		margin-block-start: 1rem;
+		padding: 1rem;
+		max-width: 52rem;
+		width: 100%;
+		margin: auto;
+
+		.footer-links-container {
+			display: flex;
+			justify-content: center;
+		}
+
+		.copyright {
+			margin-block-start: 1rem;
+			text-align: center;
+			grid-column: 1 / -1;
+		}
 	}
 </style>

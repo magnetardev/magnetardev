@@ -1,0 +1,15 @@
+---
+export type Props = {
+	title: string;
+	href: string;
+}
+
+const { title, href } = Astro.props;
+---
+<a class="footer-link" href={href}>{title}</a>
+
+<style is:global>
+	.footer-link {
+		display: block;
+	}
+</style>
