@@ -57,5 +57,11 @@ const { label, detail, href, icon } = Astro.props;
 				color: var(--tint-primary);
 			}
 		}
+
+		@media (width <= 320px) {
+			.contact-list-item-detail {
+				display: none;
+			}
+		}
 	}
 </style>

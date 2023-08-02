@@ -32,7 +32,7 @@ if (maximum) {
 }
 ---
 
-<div aria-role="list" class="projects-list">
+<div class="projects-list">
 	{
 		projects.map((project) => {
 			return (
@@ -70,6 +70,7 @@ if (maximum) {
 									class="project-link"
 									href={project.data.github}
 									target="_blank"
+									title="GitHub Repository"
 								>
 									<IconGithub />
 								</a>
@@ -79,6 +80,7 @@ if (maximum) {
 									class="project-link"
 									href={project.data.link}
 									target="_blank"
+									title="Project Link"
 								>
 									<IconLink />
 								</a>

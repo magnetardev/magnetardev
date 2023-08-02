@@ -48,7 +48,7 @@ import { SITE_DESCRIPTION, SOCIAL_LINKS } from "$consts";
 		</Section>
 
 		<Section title="Projects">
-			<ProjectsList minimal />
+			<ProjectsList />
 		</Section>
 	</main>
 </Layout>
@@ -65,5 +65,17 @@ import { SITE_DESCRIPTION, SOCIAL_LINKS } from "$consts";
 	.headline-subtitle {
 		font-size: 1.5rem;
 		color: var(--text-secondary);
+	}
+
+	@media (width <= 768px) {
+		.headline-title {
+			font-size: 2rem;
+			line-height: 2rem;
+		}
+
+		.headline-subtitle {
+			font-size: 1.25rem;
+			line-height: 1.75rem;
+		}
 	}
 </style>

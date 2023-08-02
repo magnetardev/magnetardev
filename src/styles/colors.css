@@ -1,25 +1,25 @@
 :root {
-    --background-primary: rgba(255 255 255 / 1);
-    --background-secondary: rgba(244 244 245 / 1);
+	--background-primary: rgb(255 255 255 / 1);
+	--background-secondary: rgb(244 244 245 / 1);
 
-    --text-primary: rgba(39 39 42 / 1);
-    --text-secondary: rgba(82 82 91 / 1);
-    --text-tertiary: rgba(161 161 170 / 1);
+	--text-primary: rgb(39 39 42 / 1);
+	--text-secondary: rgb(82 82 91 / 1);
+	--text-tartiary: rgb(113 113 122 / 1);
 
-    --tint-primary: #3b82f6;
-    --tint-secondary:#dbeafe;
-    --tint-background: #f0f9ff;
+	--tint-primary: rgb(37 99 235 / 1);
+	--tint-secondary: rgb(219 234 254 / 1);
+	--tint-background: rgb(240 249 255 / 1);
 
-    @media (prefers-color-scheme: dark) {
-        --background-primary: rgba(24 24 27 / 1);
-        --background-secondary: rgba(39 39 42 / .5);
+	@media (prefers-color-scheme: dark) {
+		--background-primary: rgb(24 24 27 / 1);
+		--background-secondary: rgb(39 39 42 / 0.5);
 
-        --text-primary: rgba(244 244 245 / 1);
-        --text-secondary: rgba(161 161 170 / 1);
-        --text-tertiary: rgb(113 113 122 / 1);
+		--text-primary: rgb(244 244 245 / 1);
+		--text-secondary: rgb(212 212 216 / 1);
+		--text-tertiary: rgb(161 161 170 / 1);
 
-        --tint-primary: #0ea5e9;
-        --tint-secondary: #0c4a6e;
-        --tint-background: #082f49;
-    }
+		--tint-primary: rgb(14 165 233 / 1);
+		--tint-secondary: rgb(12 74 110 / 1);
+		--tint-background: rgb(8 47 73 / 1);
+	}
 }
