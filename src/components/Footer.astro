@@ -1,38 +1,58 @@
 ---
-// import { SOCIAL_LINKS } from "../consts";
-// import FooterLink from "./FooterLink.astro"
-// import FooterGroup from "./FooterGroup.astro"
+import SocialIcon from "$components/social_icon.astro";
+import { SOCIAL_LINKS } from "$consts";
 ---
+
 <footer>
-	<!-- <div class="footer-links-container"> -->
-	<!-- 	<FooterGroup title="Site"> -->
-	<!-- 		<FooterLink title="Blog" href="/blog" /> -->
-	<!-- 		<FooterLink title="Projects" href="/projects" /> -->
-	<!-- 		<FooterLink title="RSS" href="/rss.xml" /> -->
-	<!-- 	</FooterGroup> -->
-	<!-- 	<FooterGroup title="Social"> -->
-	<!-- 		{SOCIAL_LINKS.map((link) => <FooterLink title={link.label} href={link.url} />)} -->
-	<!-- 	</FooterGroup> -->
-	<!-- </div> -->
-	<p class="copyright">&copy; Magnetar</p>
+	<p class="copyright">
+		&copy; {new Date(Date.now()).getFullYear()} Magnetar. All rights reserved.
+	</p>
+	<div class="footer-links-container">
+		{
+			SOCIAL_LINKS.map((profile) => (
+				<a class="footer-link" title={profile.label} href={profile.url}>
+					<SocialIcon icon={profile.icon} />
+				</a>
+			))
+		}
+	</div>
 </footer>
+
 <style is:global>
 	footer {
 		margin-block-start: 1rem;
 		padding: 1rem;
+		padding-block-end: 2rem;
 		max-width: 52rem;
 		width: 100%;
 		margin: auto;
 
 		.footer-links-container {
+			margin-block-start: 0.75rem;
 			display: flex;
 			justify-content: center;
+
+			.footer-link {
+				color: var(--text-primary);
+				display: block;
+				margin-inline: 0.75rem;
+
+				&:hover {
+					color: var(--tint-primary);
+				}
+
+				& svg {
+					width: 1.25rem;
+					height: 1.25rem;
+				}
+			}
 		}
 
 		.copyright {
 			margin-block-start: 1rem;
 			text-align: center;
 			grid-column: 1 / -1;
+			color: var(--text-secondary);
 		}
 	}
 </style>

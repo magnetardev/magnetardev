@@ -1,19 +1,21 @@
-import { defineConfig } from 'astro/config';
-import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import lightningcss from 'vite-plugin-lightningcss';
+import { defineConfig } from 'astro/config';
 
 export default defineConfig({
 	site: 'https://magnetar.dev',
-	integrations: [mdx(), sitemap()],
+	integrations: [sitemap()],
+	experimental: {
+		assets: true,
+	},
 	vite: {
-		plugins: [
-			lightningcss({
+		css: {
+			transformer: "lightningcss",
+			lightningcss: {
 				browserslist: '>= 0.25%',
 				drafts: {
 					nesting: true
 				}
-			}),
-		],
+			}
+		}
 	},
 });

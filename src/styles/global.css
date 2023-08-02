@@ -1,5 +1,11 @@
+@import "./colors.css";
 @import "./reset.css";
 
 body {
 	font-family: system-ui;
+	color: var(--text-primary);
+}
+
+html, body {
+	background-color: var(--background-primary);
 }

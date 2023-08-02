@@ -1,20 +1,69 @@
 ---
-import { CollectionEntry, getCollection } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
+import FormattedDate from "$components/formatted_date.astro";
+import Layout from "$components/layouts/basic.astro";
+import MarkdownContent from "$components/markdown_content.astro";
+import Section from "$components/section.astro";
+import { CollectionEntry, getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
+	const posts = await getCollection("blog");
 	return posts.map((post) => ({
 		params: { slug: post.slug },
 		props: post,
 	}));
 }
-type Props = CollectionEntry<'blog'>;
+type Props = CollectionEntry<"blog">;
 
-const post = Astro.props;
-const { Content } = await post.render();
+const {
+	render: renderContent,
+	data: { title, pubDate, updatedDate, description },
+} = Astro.props;
+const { Content } = await renderContent();
 ---
 
-<BlogPost {...post.data}>
-	<Content />
-</BlogPost>
+<Layout {title} {description}>
+	<main>
+		<Section>
+			<article>
+				<div class="content-header">
+					<FormattedDate date={pubDate} />
+					<h1 class="title">{title}</h1>
+					{
+						updatedDate && (
+							<div class="last-updated-on">
+								Last updated on{" "}
+								<FormattedDate date={updatedDate} />
+							</div>
+						)
+					}
+				</div>
+				<MarkdownContent>
+					<Content />
+				</MarkdownContent>
+			</article>
+		</Section>
+	</main>
+</Layout>
+
+<style is:global>
+	.content-header {
+		& time {
+			color: var(--text-tertiary);
+			font-size: 1.1rem;
+		}
+
+		.title {
+			font-weight: 600;
+			margin-block-start: 0.25rem;
+			margin-block-end: 2rem;
+			color: var(--text-primary);
+			font-size: 1.5rem;
+			line-height: 2.5rem;
+
+			@media (width >= 769px) {
+				font-size: 3rem;
+				line-height: 1;
+			}
+		}
+	}
+</style>

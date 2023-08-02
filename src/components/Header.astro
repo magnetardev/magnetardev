@@ -1,11 +1,11 @@
 ---
-import HeaderLink from './HeaderLink.astro';
-import Logo from './icons/logo.astro';
-import { SITE_TITLE } from '../consts';
+import { SITE_TITLE } from "../consts";
+import HeaderLink from "./header_link.astro";
+import Logo from "./icons/logo.astro";
 ---
 
-<header class="header">
-	<div class="header-content">
+<header>
+	<div class="content">
 		<a class="header-branding" href="/">
 			<div class="header-logo">
 				<Logo />
@@ -14,15 +14,16 @@ import { SITE_TITLE } from '../consts';
 		</a>
 		<nav class="header-items">
 			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/projects">Projects</HeaderLink>
-			<HeaderLink href="https://github.com/magnetardev" target="_blank">GitHub</HeaderLink>
+			<HeaderLink href="https://github.com/magnetardev" target="_blank">
+				GitHub
+			</HeaderLink>
 		</nav>
 	</div>
 </header>
 
 <style is:global>
-	.header {
-		.header-content {
+	header {
+		.content {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
@@ -35,7 +36,10 @@ import { SITE_TITLE } from '../consts';
 			display: flex;
 			align-items: center;
 			text-decoration: none;
-			color: #000;
+			color: var(--text-primary);
+			padding: 0.25rem;
+			padding-inline-end: 0.75rem;
+			border-radius: 1.5rem;
 
 			.header-logo {
 				width: 2.5rem;
@@ -55,25 +59,38 @@ import { SITE_TITLE } from '../consts';
 			}
 		}
 
-		.header-branding:hover .header-logo {
-			box-shadow: rgba(0 0 0 / 0.15) 0 0 0 2px;
+		.header-branding:hover {
+			color: var(--tint-primary);
+			background-color: var(--tint-background);
 		}
 
 		.header-items {
 			display: flex;
 			align-items: center;
 		}
-	}
 
-	@media (prefers-reduced-motion: no-preference) {
-		.header-branding .header-logo {
-			transition: box-shadow 0.2s ease-in-out;
+		@media (prefers-reduced-motion: no-preference) {
+			.header-branding {
+				transition: color 0.2s ease-in-out,
+					background-color 0.2s ease-in-out;
+			}
 		}
-	}
 
-	@media (width <= 32rem) {
-		.header-title {
-			display: none;
+		@media (width <= 32rem) {
+			.header-title {
+				display: none;
+			}
+
+			.header-items {
+				display: flex;
+				overflow: scroll;
+				align-items: center;
+				justify-content: center;
+
+				.header-item {
+					padding: 0.5rem;
+				}
+			}
 		}
 	}
 </style>

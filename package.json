@@ -1,25 +1,24 @@
 {
 	"name": "magnetar.dev",
 	"type": "module",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
 		"build": "astro build",
 		"preview": "astro preview",
+		"check": "astro check; tsc",
 		"astro": "astro"
 	},
-	"dependencies": {
-		"@astrojs/mdx": "^0.18.2",
-		"@astrojs/rss": "^2.3.2",
-		"@astrojs/sitemap": "^1.2.1",
-		"astro": "^2.1.9"
+	"devDependencies": {
+		"@astrojs/rss": "^2.4.3",
+		"@astrojs/sitemap": "^1.4.0",
+		"astro": "^2.9.6",
+		"lightningcss": "^1.21.5",
+		"typescript": "^5.1.6"
 	},
 	"prettier": {
 		"tabWidth": 4,
 		"useTabs": true
-	},
-	"devDependencies": {
-		"vite-plugin-lightningcss": "^0.0.5"
 	}
 }

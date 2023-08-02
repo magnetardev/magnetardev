@@ -1,0 +1,46 @@
+---
+import Icon from "$components/social_icon.astro";
+import type { SocialIcon } from "$consts";
+export type Props = {
+	label: string;
+	detail: string;
+	href: string;
+	icon: SocialIcon;
+};
+
+const { label, detail, href, icon } = Astro.props;
+---
+
+<a
+	class="contact-list-item"
+	href={href}
+	target="_blank"
+	rel="noreferrer"
+	role="listitem"
+>
+	<Icon {icon} />
+	<span class="contact-list-item-label">{label}</span>
+	<span class="contact-list-item-detail">{detail}</span>
+</a>
+
+<style is:global>
+	.contact-list-item {
+		display: grid;
+		text-decoration: none;
+		margin-block-end: 0.5rem;
+		max-inline-size: 24rem;
+		grid-template-columns: auto 1fr 2fr;
+		color: var(--text-primary);
+		align-items: center;
+		gap: 0.75rem;
+
+		& svg {
+			width: 1rem;
+			height: 1rem;
+		}
+
+		.contact-list-item-detail {
+			color: var(--text-secondary);
+		}
+	}
+</style>

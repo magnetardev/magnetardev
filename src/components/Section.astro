@@ -1,5 +1,14 @@
+---
+type Props = {
+	title?: string;
+};
+
+const { title } = Astro.props;
+---
+
 <section class="section">
-	<slot/>
+	{title && <h2>{title}</h2>}
+	<slot />
 </section>
 
 <style is:global>
@@ -7,5 +16,11 @@
 		max-width: 52rem;
 		margin: 2rem auto;
 		padding: 0 1rem;
+
+		& > h2 {
+			margin-block: 1rem 0.5rem;
+			font-size: 1.5rem;
+			font-weight: 600;
+		}
 	}
 </style>

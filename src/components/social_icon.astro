@@ -1,0 +1,43 @@
+---
+import type { SocialIcon } from "$consts";
+
+type Props = {
+	icon: SocialIcon;
+};
+
+const { icon } = Astro.props;
+
+let Tag: (props: Record<string, unknown>) => unknown;
+switch (icon) {
+	case "email": {
+		const { default: component } = await import(
+			"$components/icons/email.astro"
+		);
+		Tag = component;
+		break;
+	}
+	case "github": {
+		const { default: component } = await import(
+			"$components/icons/github.astro"
+		);
+		Tag = component;
+		break;
+	}
+	case "twitter": {
+		const { default: component } = await import(
+			"$components/icons/twitter.astro"
+		);
+		Tag = component;
+		break;
+	}
+	case "mastodon": {
+		const { default: component } = await import(
+			"$components/icons/mastodon.astro"
+		);
+		Tag = component;
+		break;
+	}
+}
+---
+
+<Tag />

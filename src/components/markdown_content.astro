@@ -1,0 +1,57 @@
+<div class="prose">
+	<slot />
+</div>
+<style is:global>
+	.prose {
+		font-size: 1rem;
+		line-height: 1.75rem;
+		color: var(--text-secondary);
+
+		& :is(h1, h2, h3, h4, h5, h6) {
+			color: var(--text-primary);
+		}
+
+		& > * {
+			margin-block: 2rem;
+		}
+
+		& p {
+			margin-block: 1.75rem;
+		}
+
+		& h2 {
+			font-size: 1.25rem;
+			line-height: 1.75rem;
+			margin-top: 5rem;
+			margin-bottom: 1rem;
+			font-weight: 600;
+		}
+
+		& pre {
+			font-size: 0.875rem;
+			font-weight: 500;
+			border-radius: 0.5rem;
+			padding: 2rem;
+			overflow-x: auto;
+		}
+
+		& li {
+			margin-block: 1rem;
+			padding-left: 0.875rem;
+
+			&::marker {
+				font-size: 0.875rem;
+				font-weight: 600;
+			}
+		}
+
+		& :is(ul, ol) {
+			padding-left: 1.5rem;
+			list-style-type: decimal;
+
+			& li::marker {
+				color: var(--text-primary);
+			}
+		}
+	}
+</style>

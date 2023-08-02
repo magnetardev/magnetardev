@@ -1,0 +1,23 @@
+:root {
+    --background-primary: rgba(255 255 255 / 1);
+    --background-secondary: rgba(244 244 245 / 1);
+
+    --text-primary: rgba(39 39 42 / 1);
+    --text-secondary: rgba(82 82 91 / 1);
+    --text-tertiary: rgba(161 161 170 / 1);
+
+    --tint-primary: #3b82f6;
+    --tint-background: #f0f9ff;
+
+    @media (prefers-color-scheme: dark) {
+        --background-primary: rgba(24 24 27 / 1);
+        --background-secondary: rgba(39 39 42 / .5);
+
+        --text-primary: rgba(244 244 245 / 1);
+        --text-secondary: rgba(161 161 170 / 1);
+        --text-tertiary: rgb(113 113 122 / 1);
+
+        --tint-primary: #0ea5e9;
+        --tint-background: #082f49;
+    }
+}

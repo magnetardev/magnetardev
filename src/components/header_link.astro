@@ -1,0 +1,54 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import ExternalIcon from "./icons/external.astro";
+
+type Props = HTMLAttributes<"a">;
+
+const { href, class: className, ...props } = Astro.props;
+
+const { pathname } = Astro.url;
+const isActive = href === pathname || href === pathname.replace(/\/$/, "");
+---
+
+<a href={href} class:list={["header-item", isActive && "active"]} {...props}>
+	<slot />
+	{props["target"] && <ExternalIcon />}
+</a>
+
+<style is:global>
+	a.header-item {
+		text-decoration: none;
+		color: var(--text-primary);
+		padding-inline: 1rem;
+		padding-block: 0.5rem;
+		margin-inline-start: 0.5rem;
+		border-radius: 0.45rem;
+		display: flex;
+		align-items: center;
+		font-weight: 400;
+
+		&:hover {
+			color: var(--tint-primary);
+			background-color: var(--tint-background);
+		}
+
+		& svg {
+			margin-inline-start: 0.5rem;
+			width: 0.75rem;
+			height: 0.75rem;
+		}
+
+		@media (prefers-reduced-motion: no-preference) {
+			transition: background-color 0.2s ease-in-out,
+				color 0.2s ease-in-out;
+
+			& svg {
+				transition: transform 0.2s ease-in-out;
+			}
+
+			&:hover svg {
+				transform: translateX(0.125rem) translateY(-0.125rem);
+			}
+		}
+	}
+</style>

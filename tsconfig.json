@@ -3,8 +3,10 @@
 	"compilerOptions": {
 		"strictNullChecks": true,
 		"baseUrl": ".",
+		"jsx": "preserve",
 		"paths": {
-			"@components/*": ["./src/components/*"]
+			"$components/*": ["./src/components/*"],
+			"$consts": ["./src/consts.ts"]
 		}
 	}
 }

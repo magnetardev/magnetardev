@@ -1,71 +1,79 @@
 ---
-import BaseHead from '@components/BaseHead.astro';
-import Header from '@components/Header.astro';
-import Footer from '@components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import ContactListItem from '@components/ContactListItem.astro';
-import Section from '@components/Section.astro';
-import ProjectsList from '@components/ProjectsList.astro';
-import PostList from '@components/PostList.astro';
+import ContactListItem from "$components/contact_list_item.astro";
+import Layout from "$components/layouts/basic.astro";
+import PostList from "$components/post_list.astro";
+import ProjectsList from "$components/projects_list.astro";
+import Section from "$components/section.astro";
+import SectionText from "$components/section_text.astro";
+import { SITE_DESCRIPTION, SOCIAL_LINKS } from "$consts";
+import type { CollectionEntry } from "astro:content";
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header title={SITE_TITLE} />
-		<main>
-			<Section>
-				<p class="headline-title">Hey, I'm Magnetar.</p>
-				<p class="headline-subtitle">I am designing & building sites, apps, and tools.</p>
-			</Section>
+<Layout description={SITE_DESCRIPTION}>
+	<main>
+		<Section>
+			<p class="headline-title">Hey, I'm Magnetar.</p>
+			<p class="headline-subtitle">
+				I am designing & building apps, sites, and tools.
+			</p>
+		</Section>
 
-			<Section>
-				<h2>About Me</h2>
-				<p>
-					Occaecat veniam commodo sit pariatur pariatur. Eiusmod fugiat eu magna est nulla veniam esse anim ad id tempor. Labore eiusmod ea anim minim cillum consequat ut adipisicing aliqua. Cillum ea duis et ad minim duis minim eiusmod laborum exercitation ullamco eiusmod amet dolor est.
-				</p>
-			</Section>
+		<Section title="About Me">
+			<SectionText>
+				I am a passionate programmer and interface designer motivated to
+				problem-solve and refine user experiences through software. I am
+				always trying to find new ways of engaging with problems and
+				simplifying code to its most basic form without sacrifing
+				performance. A good user experience can only come from a well
+				thought out design and codebase.
+			</SectionText>
+		</Section>
 
-			<Section>
-				<h2>Contact</h2>
-				<div role="list">
-					<ContactListItem label="Email" detail="contact@magnetar.dev" href="mailto:contact@magnetar.dev" />
-					<ContactListItem label="Twitter" detail="magnetardev" href="https://twitter.com/magnetardev" />
-					<ContactListItem label="GitHub" detail="magnetardev" href="https://github.com/magnetardev" />
-					<ContactListItem label="Mastodon" detail="@magnetardev@mstdn.social" href="https://mstdn.social/@magnetar" />
-				</div>
-			</Section>
+		<Section title="Contact">
+			<div role="list">
+				{
+					SOCIAL_LINKS.map((social) => (
+						<ContactListItem
+							label={social.label}
+							detail={social.account}
+							href={social.url}
+							icon={social.icon}
+						/>
+					))
+				}
+			</div>
+		</Section>
 
-			<Section>
-				<h2>Featured Works</h2>
-				<ProjectsList />
-			</Section>
+		<Section title="Featured Works">
+			<ProjectsList featured />
+		</Section>
 
-			<Section>
-				<h2>Recent Posts</h2>
-				<PostList />
-			</Section>
-		</main>
-		<Footer />
-	</body>
-</html>
+		<Section title="Recent Posts">
+			<PostList maximum={3} />
+		</Section>
+
+		<Section title="Other Work">
+			<ProjectsList
+				filter={(project: CollectionEntry<"projects">) =>
+					!project.data.feature}
+				minimal
+				prioritize
+			/>
+		</Section>
+	</main>
+</Layout>
 
 <style is:global>
 	.headline-title {
 		font-size: 3rem;
+		line-height: 3rem;
+		margin-block-end: 0.5rem;
 		font-weight: 700;
+		color: var(--text-primary);
 	}
 
 	.headline-subtitle {
 		font-size: 1.5rem;
-	}
-
-	h2 {
-		margin-block: 1rem 0.5rem;
-		font-size: 1.05rem;
-		font-weight: 600;
+		color: var(--text-secondary);
 	}
 </style>

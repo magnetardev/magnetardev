@@ -1,0 +1,18 @@
+---
+export interface Props {
+	date: Date;
+	hideDay?: boolean;
+}
+
+const { date, hideDay = false } = Astro.props;
+---
+
+<time datetime={date.toISOString()}>
+	{
+		date.toLocaleDateString("en-us", {
+			year: "numeric",
+			month: "long",
+			day: hideDay ? undefined : "numeric",
+		})
+	}
+</time>
