@@ -1,8 +1,8 @@
-import sitemap from '@astrojs/sitemap';
-import { defineConfig } from 'astro/config';
+import sitemap from "@astrojs/sitemap";
+import { defineConfig } from "astro/config";
 
 export default defineConfig({
-	site: 'https://magnetar.dev',
+	site: "https://magnetar.dev",
 	integrations: [sitemap()],
 	experimental: {
 		assets: true,
@@ -11,11 +11,11 @@ export default defineConfig({
 		css: {
 			transformer: "lightningcss",
 			lightningcss: {
-				browserslist: '>= 0.25%',
+				browserslist: ">= 0.25%",
 				drafts: {
-					nesting: true
-				}
-			}
-		}
+					nesting: true,
+				},
+			},
+		},
 	},
 });
