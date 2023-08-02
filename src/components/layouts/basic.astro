@@ -31,14 +31,17 @@ const { title, description, image = "/placeholder-social.jpg" } = Astro.props;
 		<title>{title && `${title} - `}{SITE_TITLE}</title>
 		<meta
 			name="title"
-			content={`${title ? `${title} - ` : ""}SITE_TITLE`}
+			content={`${title ? `${title} - ` : ""}${SITE_TITLE}`}
 		/>
 		<meta name="description" content={description || SITE_DESCRIPTION} />
 
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={Astro.url} />
-		<meta property="og:title" content={title} />
+		<meta
+			property="og:title"
+			content={`${title ? `${title} - ` : ""}${SITE_TITLE}`}
+		/>
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={new URL(image, Astro.url)} />
 
