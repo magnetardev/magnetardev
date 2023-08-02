@@ -1,7 +1,9 @@
 {
+	"$schema": "https://json.schemastore.org/package",
 	"name": "magnetar.dev",
 	"type": "module",
 	"version": "1.0.0",
+	"packageManager": "pnpm@8.6.11",
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
