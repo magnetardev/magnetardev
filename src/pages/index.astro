@@ -6,7 +6,6 @@ import ProjectsList from "$components/projects_list.astro";
 import Section from "$components/section.astro";
 import SectionText from "$components/section_text.astro";
 import { SITE_DESCRIPTION, SOCIAL_LINKS } from "$consts";
-import type { CollectionEntry } from "astro:content";
 ---
 
 <Layout description={SITE_DESCRIPTION}>
@@ -44,21 +43,12 @@ import type { CollectionEntry } from "astro:content";
 			</div>
 		</Section>
 
-		<Section title="Featured Works">
-			<ProjectsList featured />
-		</Section>
-
 		<Section title="Recent Posts">
 			<PostList maximum={3} />
 		</Section>
 
-		<Section title="Other Work">
-			<ProjectsList
-				filter={(project: CollectionEntry<"projects">) =>
-					!project.data.feature}
-				minimal
-				prioritize
-			/>
+		<Section title="Projects">
+			<ProjectsList minimal />
 		</Section>
 	</main>
 </Layout>

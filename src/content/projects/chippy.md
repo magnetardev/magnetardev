@@ -5,5 +5,6 @@ state: archived
 feature: false 
 startDate: 11-06-2019 
 endDate: 11-06-2019 
-link: https://github.com/magnetardev/chippy
+github: https://github.com/magnetardev/chippy
+languages: [javascript]
 ---

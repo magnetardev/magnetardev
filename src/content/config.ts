@@ -1,4 +1,4 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z } from "astro:content";
 
 const blog = defineCollection({
 	schema: z.object({
@@ -20,19 +20,28 @@ const blog = defineCollection({
 });
 
 const projects = defineCollection({
-	schema: ({ image }) => z.object({
-		title: z.string(),
-		headline: z.string(),
-		screenshot: z.optional(image()),
-		screenshotAlt: z.string().optional(),
-		link: z.string().optional(),
-		state: z.enum(['archived', 'active', 'complete']),
-		feature: z.boolean().optional(),
-		startDate: z.string().or(z.date()).transform((val) => new Date(val)),
-		endDate: z.string().or(z.date()).transform((val) => new Date(val)).optional(),
-		priority: z.number().optional(),
-	}),
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			headline: z.string(),
+			screenshot: z.optional(image()),
+			screenshotAlt: z.string().optional(),
+			link: z.string().optional(),
+			github: z.string().optional(),
+			state: z.enum(["archived", "active", "complete"]),
+			feature: z.boolean().optional(),
+			startDate: z
+				.string()
+				.or(z.date())
+				.transform((val) => new Date(val)),
+			endDate: z
+				.string()
+				.or(z.date())
+				.transform((val) => new Date(val))
+				.optional(),
+			priority: z.number().optional(),
+			languages: z.array(z.string()),
+		}),
 });
-
 
 export const collections = { blog, projects };

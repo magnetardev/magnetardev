@@ -7,6 +7,7 @@
     --text-tertiary: rgba(161 161 170 / 1);
 
     --tint-primary: #3b82f6;
+    --tint-secondary:#dbeafe;
     --tint-background: #f0f9ff;
 
     @media (prefers-color-scheme: dark) {
@@ -18,6 +19,7 @@
         --text-tertiary: rgb(113 113 122 / 1);
 
         --tint-primary: #0ea5e9;
+        --tint-secondary: #0c4a6e;
         --tint-background: #082f49;
     }
 }

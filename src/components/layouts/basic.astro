@@ -50,8 +50,23 @@ const { title, description, image = "/placeholder-social.jpg" } = Astro.props;
 		<meta property="twitter:image" content={new URL(image, Astro.url)} />
 	</head>
 	<body>
-		<Header title={SITE_TITLE} />
-		<slot />
-		<Footer />
+		<div class="content">
+			<Header title={SITE_TITLE} />
+			<slot />
+			<Footer />
+		</div>
 	</body>
 </html>
+
+<style is:global>
+	.content {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: 100%;
+
+		& main {
+			flex: 1 1 auto;
+		}
+	}
+</style>

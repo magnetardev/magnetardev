@@ -1,7 +1,7 @@
 ---
-title: A Blank Slate
+title: New Blank Slate
 description: A fresh site redesign.
-pubDate: 2023-04-2
+pubDate: 04-02-2023
 ---
 
 I've come to realize how little my online presence speaks to what I actually do. It's more or less just me announcing project updates or releases. It doesn't really speak to my passions about software development. I want my blog to be a space for me to express those things.

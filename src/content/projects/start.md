@@ -5,5 +5,6 @@ state: archived
 feature: false 
 startDate: 12-23-2018
 endDate: 03-17-2019
-link: https://github.com/magnetardev/start
+github: https://github.com/magnetardev/start
+languages: [javascript]
 ---

@@ -12,6 +12,7 @@ export async function getStaticPaths() {
 		props: post,
 	}));
 }
+
 type Props = CollectionEntry<"blog">;
 
 const {
@@ -53,11 +54,11 @@ const { Content } = await renderContent();
 		}
 
 		.title {
-			font-weight: 600;
+			font-weight: 700;
 			margin-block-start: 0.25rem;
 			margin-block-end: 2rem;
 			color: var(--text-primary);
-			font-size: 1.5rem;
+			font-size: 1.375rem;
 			line-height: 2.5rem;
 
 			@media (width >= 769px) {

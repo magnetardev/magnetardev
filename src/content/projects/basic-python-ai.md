@@ -5,5 +5,6 @@ state: archived
 feature: false 
 startDate: 04-29-2020
 endDate: 05-04-2020
-link: https://github.com/magnetardev/basic-python-ai
+github: https://github.com/magnetardev/basic-python-ai
+languages: [python]
 ---

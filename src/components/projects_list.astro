@@ -1,29 +1,18 @@
 ---
-import { Image } from "astro:assets";
+import FormattedDate from "$components/formatted_date.astro";
+import IconGithub from "$components/icons/github.astro";
+import IconLink from "$components/icons/link.astro";
 import { CollectionEntry, getCollection } from "astro:content";
-import FormattedDate from "./formatted_date.astro";
 
 export type Project = CollectionEntry<"projects">;
 
 export type Props = {
-	minimal?: boolean;
-	featured?: boolean;
 	filter?: (item: Project) => unknown;
 	prioritize?: boolean;
 	maximum?: number;
 };
 
-let {
-	minimal = false,
-	featured = false,
-	filter,
-	prioritize = false,
-	maximum,
-} = Astro.props;
-
-if (featured) {
-	filter ??= (project: Project) => project.data.feature;
-}
+let { filter, maximum } = Astro.props;
 
 let projects: Project[] = (await getCollection("projects", filter)).sort(
 	({ data: a }, { data: b }) => {
@@ -34,68 +23,20 @@ let projects: Project[] = (await getCollection("projects", filter)).sort(
 		} else if (!a.endDate) {
 			return -1;
 		}
-		return (
-			(b.startDate as unknown as number) -
-			(a.startDate as unknown as number)
-		);
+		return b.startDate.getTime() - a.startDate.getTime();
 	}
 );
-
-if (prioritize) {
-	projects.sort(({ data: a }, { data: b }) => {
-		if (!a.priority && b.priority) {
-			return -1;
-		}
-		if (a.priority && !b.priority) {
-			return 1;
-		}
-		if (!a.priority && !b.priority) {
-			return 0;
-		}
-		if (a.priority! < b.priority!) {
-			return -1;
-		}
-		if (a.priority! > b.priority!) {
-			return 1;
-		}
-		return 0;
-	});
-}
 
 if (maximum) {
 	projects = projects.slice(0, Math.min(maximum, projects.length));
 }
 ---
 
-<div
-	aria-role="list"
-	class:list={["projects-list", featured && "featured", minimal && "minimal"]}
->
+<div aria-role="list" class="projects-list">
 	{
 		projects.map((project) => {
-			const Tag = project.data.link ? "a" : "article";
 			return (
-				// FIXME: Make it more clear whether a project is a link or not
-				<Tag class="project-item" href={project.data.link || "#"}>
-					{featured && project.data.screenshot && (
-						<div
-							class="project-media"
-							style={{
-								"--width": project.data.screenshot.width,
-								"--height": project.data.screenshot.height,
-							}}
-						>
-							<div class="media-container">
-								<Image
-									src={project.data.screenshot}
-									alt={
-										project.data.screenshotAlt ||
-										`${project.data.title}'s screenshot'`
-									}
-								/>
-							</div>
-						</div>
-					)}
+				<article class="project-item">
 					<div class="project-content">
 						<div class="project-info">
 							<h3 class="project-title">{project.data.title}</h3>
@@ -103,23 +44,48 @@ if (maximum) {
 								{project.data.headline}
 							</p>
 						</div>
-						<div class="project-date">
-							<FormattedDate
-								date={project.data.startDate}
-								hideDay
-							/>{" "}
-							-{" "}
-							{project.data.endDate ? (
+						<div class="project-tags">
+							{project.data.languages.map((lang) => (
+								<div class="project-tag">{lang}</div>
+							))}
+						</div>
+						<div class="project-links">
+							<div class="project-date">
 								<FormattedDate
-									date={project.data.endDate}
+									date={project.data.startDate}
 									hideDay
-								/>
-							) : (
-								"Present"
+								/>{" "}
+								-{" "}
+								{project.data.endDate ? (
+									<FormattedDate
+										date={project.data.endDate}
+										hideDay
+									/>
+								) : (
+									"Present"
+								)}
+							</div>
+							{project.data.github && (
+								<a
+									class="project-link"
+									href={project.data.github}
+									target="_blank"
+								>
+									<IconGithub />
+								</a>
+							)}
+							{project.data.link && (
+								<a
+									class="project-link"
+									href={project.data.link}
+									target="_blank"
+								>
+									<IconLink />
+								</a>
 							)}
 						</div>
 					</div>
-				</Tag>
+				</article>
 			);
 		})
 	}
@@ -128,108 +94,83 @@ if (maximum) {
 <style is:global>
 	.projects-list {
 		.project-item {
+			padding: 0;
+			margin-block-end: 2rem;
 			color: inherit;
 			text-decoration: none;
-			display: block;
+			display: flex;
 			border-radius: 0.5rem;
-
-			.project-title {
-				font-weight: 500;
-			}
-
-			.project-headline {
-				color: var(--text-secondary);
-			}
 
 			.project-date {
 				color: var(--text-tertiary);
 			}
-		}
 
-		&.featured {
-			.project-item {
+			.project-links {
+				margin-block-start: 0.5rem;
 				display: flex;
 				align-items: center;
-				margin-block-end: 3rem;
 
-				.project-media {
-					position: relative;
-					flex: 1;
-					width: 100%;
-					margin-inline: 0 1rem;
-					max-width: 100%;
+				& > * {
+					margin-inline-end: 1rem;
+				}
 
-					@supports not (aspect-ratio: 1) {
-						.media-container {
-							padding-bottom: calc(
-								var(--height) / var(--width) * 100%
-							);
+				.project-link {
+					& svg {
+						width: 1.25rem;
+						height: 1.25rem;
+						color: var(--text-primary);
+
+						&:hover {
+							color: var(--tint-primary);
+						}
+
+						@media (prefers-reduced-motion: no-preference) {
+							transition: color 0.2ms ease-in-out;
 						}
 					}
-
-					@supports (aspect-ratio: 1) {
-						aspect-ratio: var(--width) / var(--height);
-					}
-
-					& img {
-						position: absolute;
-						inset: 0;
-						width: 100%;
-						height: 100%;
-					}
 				}
+			}
+
+			.project-tags {
+				margin-block: 0.25rem;
+				display: flex;
+				align-items: center;
+
+				.project-tag {
+					color: var(--tint-primary);
+					padding-block: 0.125rem;
+					padding-inline: 0.625rem;
+					border-radius: 1rem;
+					background-color: var(--tint-background);
+					border: solid 1.5px var(--tint-secondary);
+					font-weight: bold;
+					text-transform: uppercase;
+					font-size: 0.65rem;
+					font-weight: 700;
+					margin-inline-end: 0.5rem;
+				}
+			}
+
+			.project-content {
+				flex: 1 1 auto;
+			}
+
+			.project-info {
+				display: flex;
+				align-items: center;
 
 				.project-title {
-					font-size: 1.25rem;
+					font-weight: 500;
+					margin-inline-end: 0.5rem;
+					font-size: 1.05rem;
 				}
 
-				.project-content {
-					flex: 1;
-				}
-
-				&:nth-child(even) {
-					flex-direction: row-reverse;
-
-					.project-media {
-						margin-inline: 1rem 0;
-					}
+				.project-headline {
+					color: var(--text-secondary);
 				}
 
 				@media (width <= 768px) {
 					display: block;
-
-					.project-media {
-						margin-inline: 0 !important;
-						margin-block-end: 0.5rem;
-					}
-				}
-			}
-		}
-
-		&.minimal {
-			display: block;
-
-			.project-item {
-				padding: 0;
-				margin-block-end: 2rem;
-
-				.project-info {
-					display: flex;
-					align-items: center;
-
-					@media (width <= 768px) {
-						display: block;
-
-						.project-media {
-							margin-inline: 0 !important;
-							margin-block-end: 0.5rem;
-						}
-					}
-				}
-
-				.project-title {
-					margin-inline-end: 0.5rem;
-					font-size: 1.05rem;
 				}
 			}
 		}

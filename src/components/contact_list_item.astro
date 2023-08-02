@@ -42,5 +42,20 @@ const { label, detail, href, icon } = Astro.props;
 		.contact-list-item-detail {
 			color: var(--text-secondary);
 		}
+
+		@media (prefers-reduced-motion: no-preference) {
+			&,
+			.contact-list-item-detail {
+				transition: color 0.2s ease-in-out;
+			}
+		}
+
+		&:hover {
+			color: var(--tint-primary);
+
+			.contact-list-item-detail {
+				color: var(--tint-primary);
+			}
+		}
 	}
 </style>

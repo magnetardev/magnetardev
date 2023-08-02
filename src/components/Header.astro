@@ -5,7 +5,7 @@ import Logo from "./icons/logo.astro";
 ---
 
 <header>
-	<div class="content">
+	<div class="header-content">
 		<a class="header-branding" href="/">
 			<div class="header-logo">
 				<Logo />
@@ -23,7 +23,7 @@ import Logo from "./icons/logo.astro";
 
 <style is:global>
 	header {
-		.content {
+		.header-content {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
@@ -57,23 +57,21 @@ import Logo from "./icons/logo.astro";
 				margin-inline-start: 0.5rem;
 				font-weight: 500;
 			}
-		}
 
-		.header-branding:hover {
-			color: var(--tint-primary);
-			background-color: var(--tint-background);
+			&:hover {
+				color: var(--tint-primary);
+				background-color: var(--tint-background);
+			}
+
+			@media (prefers-reduced-motion: no-preference) {
+				transition: color 0.2s ease-in-out,
+					background-color 0.2s ease-in-out;
+			}
 		}
 
 		.header-items {
 			display: flex;
 			align-items: center;
-		}
-
-		@media (prefers-reduced-motion: no-preference) {
-			.header-branding {
-				transition: color 0.2s ease-in-out,
-					background-color 0.2s ease-in-out;
-			}
 		}
 
 		@media (width <= 32rem) {

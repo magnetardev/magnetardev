@@ -5,5 +5,6 @@ state: archived
 feature: false
 startDate: 06-05-2019
 endDate: 07-27-2019
-link: https://github.com/magnetardev/swiftfetch
+github: https://github.com/magnetardev/swiftfetch
+languages: [swift]
 ---
