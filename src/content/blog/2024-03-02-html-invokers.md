@@ -1,7 +1,7 @@
 ---
 title: Invokers, a Simpler Future for the Web
 description: A proposal that enables you to write less JS and write more declarative HTML.
-pubDate: 03-02-2023 
+pubDate: 03-02-2024
 ---
 
 *At the time of writing this, the Invokers API is just a proposal. However, it is very simple to polyfill yourself or to use an existing one.*
